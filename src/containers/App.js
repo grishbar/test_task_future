@@ -4,6 +4,7 @@ import Loader from '../components/Loader';
 import Table from '../components/Table';
 import TablePagination from '../components/TablePagination';
 import Filter from '../components/Filter'
+import AddUser from '../components/AddUser';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
     this.updateUsersData = this.updateUsersData.bind(this);
     this.getFilteredArray = this.getFilteredArray.bind(this);
     this.updateIsFieldSorted = this.updateIsFieldSorted.bind(this);
+    this.addRowInUsersData = this.addRowInUsersData.bind(this);
     //допустим, что мы знаем поля лежащие в файле пользователей, и у всех пользователей данные заполнены корректно
     this.state = {isDataLoading: false, isStartScreen: true, url: '', usersData: [],
     usersFields: ['id', 'firstName', 'lastName', 'email', 'phone'],  currentPage: 0, 
@@ -91,6 +93,15 @@ export default class App extends React.Component {
    // this.updateIsFieldSorted({id: 0, firstName: 0, lastName: 0, email: 0, phone: 0});
   }
 
+  addRowInUsersData(newUser){
+    let tempUsersData = this.state.usersData;
+    tempUsersData.unshift(newUser);
+    this.setState({
+      usersData: tempUsersData,
+    });
+    this.updateCurrentPageArray(0, tempUsersData);
+  }
+
   render () {
     return (
       <div className="App">
@@ -98,6 +109,8 @@ export default class App extends React.Component {
         {this.state.isDataLoading && <Loader />}
         {Boolean(this.state.usersData.length) && <Filter 
           getFilteredArray = {this.getFilteredArray} />}
+        {Boolean(this.state.usersData.length) && <AddUser 
+          addRowInUsersData = {this.addRowInUsersData} />}
         {Boolean(this.state.usersData.length) && <Table 
           usersFields ={this.state.usersFields}
           usersData = {this.state.isUsersDataFiltered ? this.state.filteredUsersData : this.state.usersData}

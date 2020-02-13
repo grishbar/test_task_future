@@ -212,6 +212,7 @@ code {
 }
 
 .pagination-block__button {
+  cursor: pointer;
   border: 20px solid transparent;
   border-right: 20px solid #58aef3;
   margin: 0 10px;
@@ -219,6 +220,7 @@ code {
 
 .pagination-block__button_inactive {
   border-right: 20px solid grey;
+  cursor: default;
 }
 
 .pagination-block__button_reverse {
@@ -239,6 +241,7 @@ code {
 }
 
 .filter-block__button {
+  cursor: pointer;
   min-width: 125px;
   background-color: #58aef3;
   padding: 10px 15px;
@@ -246,5 +249,30 @@ code {
 }
 
 .filter-block__button_inactive {
+  background-color: gray;
+}
+
+.add-row-block {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.add-row-block__input {
+  min-width: 125px;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-right: none;
+}
+
+.add-row-block__button {
+  cursor: pointer;
+  min-width: 125px;
+  background-color: #58aef3;
+  padding: 10px 15px;
+  border: 1px solid black;
+}
+
+.add-row-block__button_inactive {
   background-color: gray;
 }

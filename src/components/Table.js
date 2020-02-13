@@ -1,14 +1,10 @@
 import React from 'react';
 
 export default class Table extends React.Component { 
-    constructor(props) {
-        super(props);
-        this.state = {isFieldSorted: {id: 0, firstName: 0, lastName: 0, email: 0, phone: 0}};
-    }
 
     sortTable(column) {
         // получаем порядок сортировки
-        const isSorted = this.state.isFieldSorted[column];
+        const isSorted = this.props.isFieldSorted[column];
         console.log('isSorted ' + isSorted);
         // устанавливаем направление
         let direction;
@@ -47,13 +43,10 @@ export default class Table extends React.Component {
           isFieldSortedTemp[this.props.usersFields[i]] = 0;
         }
         isFieldSortedTemp[column] = isFieldSortedTemp[column] ? 1 : 2;
-        console.log(isFieldSortedTemp);
         // обновляем состояние и сохраняем в localstorage
         this.props.updateUsersData(sortedArray);
         this.props.updateCurrentPageArray(0, sortedArray);
-        this.setState({
-            isFieldSorted: isFieldSortedTemp,
-        });
+        this.props.updateIsFieldSorted(isFieldSortedTemp);
     }
 
     render () {
@@ -65,7 +58,7 @@ export default class Table extends React.Component {
                   {this.props.usersFields && this.props.usersFields.map( (item, index) => (
                       <td
                           key={index + item} 
-                          className={this.state.isFieldSorted[item]? "table-blur__head-cell table-blur__head-cell_sorted_"+this.state.isFieldSorted[item] : "table-blur__head-cell"}
+                          className={this.props.isFieldSorted[item]? "table-blur__head-cell table-blur__head-cell_sorted_"+this.props.isFieldSorted[item] : "table-blur__head-cell"}
                           onClick={() => this.sortTable(item)}
                           >
                           {item}

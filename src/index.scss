@@ -84,7 +84,7 @@ code {
 .loader {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 200px;
   margin-left: -40px;
   margin-top: -40px;
 }
@@ -223,4 +223,28 @@ code {
 
 .pagination-block__button_reverse {
   transform: rotate(180deg);
+}
+
+.filter-block {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.filter-block__input {
+  min-width: 125px;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-right: none;
+}
+
+.filter-block__button {
+  min-width: 125px;
+  background-color: #58aef3;
+  padding: 10px 15px;
+  border: 1px solid black;
+}
+
+.filter-block__button_inactive {
+  background-color: gray;
 }

@@ -70,7 +70,7 @@ export default class Table extends React.Component {
                 {this.props.usersData && this.props.currentUsersArr.map((item, index) => (
                   <tr key={index + item.phone}>
                     {this.props.usersFields && this.props.usersFields.map( (itemName) => (
-                        <td key={index+itemName}>{item[itemName]}</td>
+                        <td key={index+itemName} onClick={(e) => this.props.chooseUser(item)}>{item[itemName]}</td>
                     ))}
                   </tr>
                 ))}

@@ -5,6 +5,7 @@ import Table from '../components/Table';
 import TablePagination from '../components/TablePagination';
 import Filter from '../components/Filter'
 import AddUser from '../components/AddUser';
+import ChooseUser from '../components/ChooseUser';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,11 +16,13 @@ export default class App extends React.Component {
     this.getFilteredArray = this.getFilteredArray.bind(this);
     this.updateIsFieldSorted = this.updateIsFieldSorted.bind(this);
     this.addRowInUsersData = this.addRowInUsersData.bind(this);
+    this.chooseUser = this.chooseUser.bind(this);
     //допустим, что мы знаем поля лежащие в файле пользователей, и у всех пользователей данные заполнены корректно
     this.state = {isDataLoading: false, isStartScreen: true, url: '', usersData: [],
     usersFields: ['id', 'firstName', 'lastName', 'email', 'phone'],  currentPage: 0, 
     currentUsersArr: [], isUsersDataFiltered: false, filteredUsersData: [],
-    isFieldSorted: {id: 0, firstName: 0, lastName: 0, email: 0, phone: 0}};
+    isFieldSorted: {id: 0, firstName: 0, lastName: 0, email: 0, phone: 0},
+    user: {id: '', firstName: '', lastName: '', email: '', phone: '', address: {streetAddress: '', city: '', state: '', zip: ''}}};
   }
 
   onUrlChange(url) {
@@ -102,6 +105,12 @@ export default class App extends React.Component {
     this.updateCurrentPageArray(0, tempUsersData);
   }
 
+  chooseUser(user) {
+    this.setState({
+      user: user,
+    });
+  }
+
   render () {
     return (
       <div className="App">
@@ -111,6 +120,8 @@ export default class App extends React.Component {
           getFilteredArray = {this.getFilteredArray} />}
         {Boolean(this.state.usersData.length) && <AddUser 
           addRowInUsersData = {this.addRowInUsersData} />}
+          {Boolean(this.state.usersData.length) && <ChooseUser 
+          user = {this.state.user} />}
         {Boolean(this.state.usersData.length) && <Table 
           usersFields ={this.state.usersFields}
           usersData = {this.state.isUsersDataFiltered ? this.state.filteredUsersData : this.state.usersData}
@@ -119,7 +130,8 @@ export default class App extends React.Component {
           currentUsersArr = {this.state.currentUsersArr}
           updateCurrentPageArray = {this.updateCurrentPageArray} 
           isFieldSorted = {this.state.isFieldSorted}
-          updateIsFieldSorted = {this.updateIsFieldSorted} />}
+          updateIsFieldSorted = {this.updateIsFieldSorted} 
+          chooseUser = {this.chooseUser} />}
         {Boolean(this.state.usersData.length) && <TablePagination 
           updateCurrentPageArray = {this.updateCurrentPageArray}
           currentPage = {this.state.currentPage} 

@@ -276,3 +276,15 @@ code {
 .add-row-block__button_inactive {
   background-color: gray;
 }
+
+.user-block {
+  position: absolute;
+  top: 150px;
+  font-size: 12px;
+  background-color: rgba(128, 128, 128, 0.349);
+  width: 220px;
+}
+
+.user-block__item {
+  margin: 10px;
+}
